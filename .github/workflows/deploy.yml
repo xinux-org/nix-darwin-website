@@ -25,7 +25,7 @@ jobs:
           submodules: recursive
 
       - name: Build website
-        uses: shalzz/zola-deploy-action@v0.19.1
+        uses: shalzz/zola-deploy-action@master
         env:
           BUILD_ONLY: true
           # BUILD_FLAGS: --drafts
