@@ -17,5 +17,6 @@ favicon = "nix-darwin.svg"
 juice_logo_name = "Nix Darwin"
 juice_logo_path = "nix-darwin.svg"
 juice_extra_menu = [
+  { title = "Options", link = "https://options.nix-darwin.org" },
   { title = "GitHub", link = "https://github.com/nix-darwin/darwinpkgs" },
 ]
