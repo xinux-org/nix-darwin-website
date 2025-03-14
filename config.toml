@@ -1,4 +1,4 @@
-base_url = "https://draft.nix-darwin.org/"
+base_url = "https://nix-darwin.org/"
 title = "Nix Darwin | NixOS like modules for darwin machines"
 description = "NixOS like modules for darwin machines"
 compile_sass = true
