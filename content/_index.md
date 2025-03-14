@@ -186,7 +186,7 @@ The documentation is also available as manpages by running `man 5 configuration.
 To run the latest version of the uninstaller, you can run the following command:
 
 ```
-nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller
+nix --extra-experimental-features "nix-command flakes" run github:nix-darwin/darwinpkgs#darwin-uninstaller
 ```
 
 If that command doesn't work for you, you can try the locally installed uninstaller:
