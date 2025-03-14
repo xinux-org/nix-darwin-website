@@ -64,6 +64,9 @@ jobs:
         env:
           ND_RELEASE: nix-darwin-24.11
 
+      - name: Show the tree map
+        run: nix run nixpkgs#tree ./public
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
