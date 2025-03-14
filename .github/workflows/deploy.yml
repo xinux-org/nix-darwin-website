@@ -1,6 +1,8 @@
 name: Deploy CI
 
 on:
+  schedule:
+    - cron: "0 1 * * *"
   push:
     branches:
       - main
@@ -29,6 +31,9 @@ jobs:
         env:
           BUILD_ONLY: true
           # BUILD_FLAGS: --drafts
+
+      - name: See the outputs
+        run: ls -la ./public
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
