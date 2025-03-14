@@ -2,7 +2,7 @@
 public/
 
 # Nix output
-result/
+result
 
 # Zed output
 nohup.out

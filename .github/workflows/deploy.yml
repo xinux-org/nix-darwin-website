@@ -33,23 +33,16 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Build website
-        uses: shalzz/zola-deploy-action@master
-        env:
-          BUILD_ONLY: true
-          # BUILD_FLAGS: --drafts
+        run: nix run nixpkgs#zola -- --drafts
 
-      - name: Create necessary folders
-        run: mkdir -p ./public/manual
-
-      - name: Build manual for 24.11
+      - name: Build manual for master
         run: |
           # Remove old result and build docs for given branch
           rm -Rf result
           nix build github:nix-darwin/darwinpkgs/$ND_RELEASE#manualHTML --no-write-lock-file
 
-          # Extract version from branch
-          input="$ND_RELEASE"
-          version="${input##*-}"
+          # Extract version from branch (it's master technically)
+          version="unstable"
 
           # Create according location and deploy
           mkdir -p ./public/manual/$version
