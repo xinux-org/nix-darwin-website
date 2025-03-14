@@ -132,7 +132,7 @@ That's not all! Trunk has even more useful features. Head on over to the followi
 - [Assets](@/assets.md): learn about all of Trunk's supported asset types.
 - [Configuration](@/configuration.md): learn about Trunk's configuration system and how to use the Trunk proxy.
 - [Commands](@/commands.md): learn about Trunk's CLI commands for use in your development workflows.
-- [Advanced topics](@/advanced.md): learn about some more advanced topics.
+
 - Join us on Discord by following this link [![](https://img.shields.io/discord/793890238267260958?logo=discord&style=flat-square "Discord Chat")](https://discord.gg/JEPdBujTDr)
 
 # Contributing

@@ -6,11 +6,15 @@ weight = 4
 
 Nix darwin ships manualas with every commit. You can either build one yourself or use/refer to hosted manuals that are deployed with every release!
 
+# Local
+
+After the installation of nix-darwin, you can use `darwin-help` command to access locally available copy of manuals with version corresponds to your installation.
+
 # Build
 
 Use the following commands to build manuals for desired commit/tag:
 
-```shell
+```bash
 nix build github:nix-darwin/darwinpkgs/nix-darwin-24.11#manualHTML --no-write-lock-file
 ```
 
