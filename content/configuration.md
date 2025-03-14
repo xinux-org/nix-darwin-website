@@ -1,7 +1,7 @@
 +++
 title = "Configuration"
 description = "Configuration"
-weight = 2
+weight = 1
 +++
 
 Trunk supports a layered config system. At the base, a config file can encapsulate project specific defaults, paths, ports and other config. Environment variables can be used to overwrite config file values. Lastly, CLI arguments / options take final precedence.

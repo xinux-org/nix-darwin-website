@@ -1,7 +1,7 @@
 +++
 title = "Commands"
 description = "Commands"
-weight = 3
+weight = 2
 +++
 
 After successful installation of nix-darwin, there will be a few commands available for you to interact with nix-darwin installation.

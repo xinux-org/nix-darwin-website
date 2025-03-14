@@ -1,5 +1,5 @@
 +++
-title = "Trunk"
+title = "Nix Darwin"
 sort_by = "weight"
 +++
 
@@ -129,7 +129,6 @@ The contents of your `dist` dir are now ready to be served on the web.
 
 That's not all! Trunk has even more useful features. Head on over to the following sections to learn more about how to use Trunk effectively.
 
-- [Assets](@/assets.md): learn about all of Trunk's supported asset types.
 - [Configuration](@/configuration.md): learn about Trunk's configuration system and how to use the Trunk proxy.
 - [Commands](@/commands.md): learn about Trunk's CLI commands for use in your development workflows.
 
