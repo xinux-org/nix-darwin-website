@@ -64,6 +64,12 @@ jobs:
         env:
           ND_RELEASE: nix-darwin-24.11
 
+      - name: Link stable to latest version
+        run: |
+          ln -sfn ./public/manual/$LATEST ./public/manual/stable
+        env:
+          LATEST: 24.11
+
       - name: Show the tree map
         run: nix run nixpkgs#tree ./public
 
