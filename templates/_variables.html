@@ -1,4 +1,10 @@
 <style>
+  @font-face {
+    font-family: "San Francisco Bold";
+    font-weight: 400;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+  }
+
   :root {
     /* Primary theme color */
     --primary-color: #26385D;
@@ -8,7 +14,7 @@
     --primary-text-color-over: #000;
 
     /* Primary theme link color */
-    --primary-link-color: #f9bb2d;
+    --primary-link-color: #5277C3;
 
     /* Secondary color: the background body color */
     --secondary-color: #F2F8FD;
@@ -17,15 +23,20 @@
     /* Highlight text color of table of content */
     --toc-highlight-text-color: #5277C3;
     --toc-background-color: white;
-    --code-color: #4a4a4a;
+    --code-color: #414141;
     --code-background-color: white;
-    --shadow-color: #ddd;
+    --shadow-color: #DDD;
 
     /* Font used for headers (h1 & h2) */
     --header-font-family: "Fira Sans", sans-serif;
 
     /* Font used for text */
     --text-font-family: "Fira Sans", sans-serif;
+  }
+
+  .logo {
+    font-size: 40px !important;
+    font-family: "San Francisco Bold" !important;
   }
 
   .logo, .nav-item, .hero-text, .explore-more {
