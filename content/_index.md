@@ -47,9 +47,9 @@ sudo chown $(id -nu):$(id -ng) /etc/nix-darwin
 cd /etc/nix-darwin
 
 # To use Nixpkgs unstable:
-nix flake init -t nix-darwin/master
+nix flake init -t github:nix-darwin/darwinpkgs/master
 # To use Nixpkgs 24.11:
-nix flake init -t nix-darwin/nix-darwin-24.11
+nix flake init -t github:nix-darwin/darwinpkgs/nix-darwin-24.11
 
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
 ```
@@ -96,9 +96,9 @@ Unlike NixOS, `nix-darwin` does not have an installer, you can just run `darwin-
 
 ```bash
 # To use Nixpkgs unstable:
-nix run nix-darwin/master#darwin-rebuild -- switch
+nix run github:nix-darwin/darwinpkgs/master#darwin-rebuild -- switch
 # To use Nixpkgs 24.11:
-nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch
+nix run github:nix-darwin/darwinpkgs/nix-darwin-24.11#darwin-rebuild -- switch
 ```
 
 ### Step 3. Using `nix-darwin`
