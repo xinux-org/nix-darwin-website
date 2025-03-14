@@ -12,7 +12,7 @@ Open configuration options for the current installation of nix-darwin
 
 # darwin-option
 
-_WIP_
+Show option documentation and current values
 
 # darwin-rebuild
 
