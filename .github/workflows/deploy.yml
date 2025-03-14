@@ -32,8 +32,38 @@ jobs:
           BUILD_ONLY: true
           # BUILD_FLAGS: --drafts
 
-      - name: See the outputs
-        run: ls -la ./public
+      - name: Create necessary folders
+        run: mkdir -p ./public/manual
+
+      - name: Build manual for 24.11
+        run: |
+          # Remove old result and build docs for given branch
+          rm -Rf result
+          nix build github:nix-darwin/darwinpkgs/$ND_RELEASE#manualHTML --no-write-lock-file
+
+          # Extract version from branch
+          input="$ND_RELEASE"
+          version="${input##*-}"
+
+          # Create according location and deploy
+          mkdir -p ./public/manual/$version
+          cp ./result/share/doc/darwin/* ./public/manual/$version/
+        env:
+          ND_RELEASE: master
+
+      - name: Build manual for 24.11
+        run: |
+          rm -Rf result
+          nix build github:nix-darwin/darwinpkgs/$ND_RELEASE#manualHTML --no-write-lock-file
+
+          # Extract version from branch
+          input="$ND_RELEASE"
+          version="${input##*-}"
+
+          mkdir -p ./public/manual/$version
+          cp ./result/share/doc/darwin/* ./public/manual/$version
+        env:
+          ND_RELEASE: nix-darwin-24.11
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
