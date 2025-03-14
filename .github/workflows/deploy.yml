@@ -46,7 +46,7 @@ jobs:
 
           # Create according location and deploy
           mkdir -p ./public/manual/$version
-          cp ./result/share/doc/darwin/* ./public/manual/$version/
+          cp -a ./result/share/doc/darwin/* ./public/manual/$version/
         env:
           ND_RELEASE: master
 
@@ -60,7 +60,7 @@ jobs:
           version="${input##*-}"
 
           mkdir -p ./public/manual/$version
-          cp ./result/share/doc/darwin/* ./public/manual/$version
+          cp -a ./result/share/doc/darwin/* ./public/manual/$version
         env:
           ND_RELEASE: nix-darwin-24.11
 
