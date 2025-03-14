@@ -217,9 +217,7 @@ You can go further and configure your own system with nix-darwin as you wish. Re
 
 # Contributing
 
-Let's make Nix on macOS awesome!
-
-Don't hesitate to contribute modules or open an issue.
+Let's make Nix on macOS awesome! Don't hesitate to contribute modules or open an issue.
 
 To build your configuration with local changes you can run this. This
 flag can also be used to override darwin-config or nixpkgs, for more

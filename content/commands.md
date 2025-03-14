@@ -16,12 +16,12 @@ _WIP_
 
 # darwin-rebuild
 
-_WIP_
+Apply or Build either default `/etc/nix-darwin/flake.nix` or your flake configuration passed via `--flake` flag.
 
 # darwin-version
 
-_WIP_
+Print the version (+commit) of installed nix-darwin.
 
 # darwin-uninstaller
 
-_WIP_
+Uninstall nix-darwin from your machine.
