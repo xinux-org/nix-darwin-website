@@ -3,143 +3,252 @@ title = "Nix Darwin"
 sort_by = "weight"
 +++
 
-Trunk is a WASM web application bundler for Rust. Trunk uses a simple, optional-config pattern for building & bundling WASM, JS snippets & other assets (images, css, scss) via a source HTML file.
+Nix modules for darwin, /etc/nixos/configuration.nix for macOS.
+
+This project aims to bring the convenience of a declarative system approach to macOS. nix-darwin is built up around [Nixpkgs](https://github.com/NixOS/nixpkgs), quite similar to [NixOS](https://nixos.org/).
 
 # Getting Started
 
+## Prerequisites
+
+The only prerequisite is a Nix implementation; both Nix and Lix are supported.
+
+As the official Nix installer does not include an automated uninstaller, and manual uninstallation on macOS is a complex process, we recommend using one of the following installers instead:
+
+- The [Nix installer from Determinate Systems](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer) is only recommended for use with flake-based setups.
+  It can install one of two distributions of Nix:
+
+  - To install the **recommended** vanilla upstream [Nix](https://nixos.org), you will need to explicitly say `no` when prompted to install `Determinate Nix`.
+
+  - When run with the `--determinate` flag, it will install the [Determinate](https://docs.determinate.systems/) distribution.
+    As Determinate manages the Nix installation itself, you will need to set `nix.enable = false;` in your configuration to disable nix-darwin’s own Nix management.
+    Some nix-darwin functionality that relies on managing the Nix installation, like the `nix.*` options to adjust Nix settings or configure a Linux builder, will be unavailable.
+
+- The [Lix installer](https://lix.systems/install/#on-any-other-linuxmacos-system) supports both flake-based and channel-based setups.
+
 ## Install
 
-First, install Trunk via one of the following options.
+Despite being an experimental feature in Nix currently, nix-darwin recommends that beginners use flakes to manage their nix-darwin configurations.
 
-### Plain cargo
+<details>
+<summary>Flakes (Recommended for beginners)</summary>
 
-Download the sources and build them yourself:
+### Step 1. Creating `flake.nix`
 
-```bash
-cargo install --locked trunk
-```
+<details>
+<summary>Getting started from scratch</summary>
+<p></p>
 
-You can also toggle some features using the `--features` flag:
-
-<dl>
-<dt><code>rustls</code></dt><dd>Use rustls for client and server sockets</dd>
-<dt><code>native-tls</code> (default)</dt><dd>Enable the use of the system native TLS stack for client sockets, and `openssl` for server sockets</dd>
-<dt><code>update_check</code> (default)</dt><dd>Enable the update check on startup</dd>
-</dl>
-
-**NOTE:** If both `rustls` and `native-tls` are enabled, `rustls` will be used. You can disable the default `rustls` using
-`--no-default-features`.
-
-### Cargo binstall
-
-You can download a released binary from GitHub releases through [`binstall`](https://github.com/cargo-bins/cargo-binstall).
+If you don't have an existing `configuration.nix`, you can run the following commands to generate a basic `flake.nix` inside `/etc/nix-darwin`:
 
 ```bash
-cargo binstall trunk
+sudo mkdir -p /etc/nix-darwin
+sudo chown $(id -nu):$(id -ng) /etc/nix-darwin
+cd /etc/nix-darwin
+
+# To use Nixpkgs unstable:
+nix flake init -t nix-darwin/master
+# To use Nixpkgs 24.11:
+nix flake init -t nix-darwin/nix-darwin-24.11
+
+sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
 ```
 
-### GitHub release download
+Make sure to change `nixpkgs.hostPlatform` to `aarch64-darwin` if you are using Apple Silicon.
 
-Fetch and unpack a released binary from the [release page](https://github.com/trunk-rs/trunk/releases).
+</details>
 
-For example (be sure to check for the most recent version):
+<details>
+<summary>Migrating from an existing configuration.nix</summary>
+<p></p>
 
-```bash
-wget -qO- https://github.com/trunk-rs/trunk/releases/download/0.17.10/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
-```
+Add the following to `flake.nix` in the same folder as `configuration.nix`:
 
-### NixOS
+```nix
+{
+  description = "John's darwin system";
 
-```bash
-nix-env -i trunk
-```
+  inputs = {
+    # Use `github:NixOS/nixpkgs/nixpkgs-24.11-darwin` to use Nixpkgs 24.11.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Use `github:nix-darwin/darwinpkgs/nix-darwin-24.11` to use Nixpkgs 24.11.
+    nix-darwin.url = "github:nix-darwin/darwinpkgs/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+  };
 
-### Brew
-
-```bash
-brew install trunk
-```
-
-## Additional tools
-
-Any additional tools like `wasm-bindgen` and `wasm-opt` are automatically downloaded and managed by trunk. Therefore, no further steps required 🎉.
-
-**Note:** Until `wasm-bindgen` has pre-built binaries for Apple M1, M1 users will need to install `wasm-bindgen` manually.
-
-```bash
-cargo install --locked wasm-bindgen-cli
-```
-
-## App Setup
-
-Any `wasm-bindgen`-based framework will work with Trunk. If you're new to [frontend development in Rust][], [Yew][] and [Leptos][] are two popular options.
-
-[frontend development in Rust]: https://github.com/flosse/rust-web-framework-comparison#frontend-frameworks-wasm
-[Yew]: https://yew.rs/
-[Leptos]: https://leptos.dev/
-
-The easiest way to ensure that your application launches properly is to [setup your app as an executable][cargo-layout] with a standard `main` function:
-
-[cargo-layout]: https://doc.rust-lang.org/cargo/guide/project-layout.html
-
-```rust
-fn main() {
-    // ... your app setup code here ...
+  outputs = inputs@{ self, nix-darwin, nixpkgs }: {
+    darwinConfigurations."Johns-MacBook" = nix-darwin.lib.darwinSystem {
+      modules = [ ./configuration.nix ];
+    };
+  };
 }
 ```
 
-Trunk uses a source HTML file to drive all asset building and bundling. Trunk also uses the official [dart-sass](https://github.com/sass/dart-sass), so let's get started with the following example. Copy this HTML to the root of your project's repo as `index.html`:
+Make sure to replace `Johns-MacBook` with your hostname which you can find by running `scutil --get LocalHostName`.
 
-```html
-<html>
-  <head>
-    <link data-trunk rel="scss" href="path/to/index.scss" />
-  </head>
-</html>
+Make sure to set `nixpkgs.hostPlatform` in your `configuration.nix` to either `x86_64-darwin` (Intel) or `aarch64-darwin` (Apple Silicon).
+
+</details>
+
+### Step 2. Installing `nix-darwin`
+
+Unlike NixOS, `nix-darwin` does not have an installer, you can just run `darwin-rebuild switch` to install nix-darwin. As `darwin-rebuild` won't be installed in your `PATH` yet, you can use the following command:
+
+```bash
+# To use Nixpkgs unstable:
+nix run nix-darwin/master#darwin-rebuild -- switch
+# To use Nixpkgs 24.11:
+nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch
 ```
 
-`trunk build` will produce the following HTML at `dist/index.html`, along with the compiled scss, WASM & the JS loader for the WASM:
+### Step 3. Using `nix-darwin`
 
-```html
-<html>
-  <head>
-    <link rel="stylesheet" href="/index-c920ca43256fdcb9.css" />
-    <link
-      rel="preload"
-      href="/index-7eeee8fa37b7636a_bg.wasm"
-      as="fetch"
-      type="application/wasm"
-      crossorigin=""
-    />
-    <link rel="modulepreload" href="/index-7eeee8fa37b7636a.js" />
-  </head>
-  <body>
-    <script type="module">
-      import init, * as bindings from "/index-7eeee8fa37b7636a.js";
-      window.wasmBindings = bindings;
-      init("/index-7eeee8fa37b7636a_bg.wasm");
-    </script>
-  </body>
-</html>
+After installing, you can run `darwin-rebuild` to apply changes to your system:
+
+```bash
+darwin-rebuild switch
 ```
 
-The contents of your `dist` dir are now ready to be served on the web.
+#### Using flake inputs
+
+Inputs from the flake can also be passed into `darwinSystem`. These inputs are then
+accessible as an argument `inputs`, similar to `pkgs` and `lib`, inside the configuration.
+
+```nix
+# in flake.nix
+nix-darwin.lib.darwinSystem {
+  modules = [ ./configuration.nix ];
+  specialArgs = { inherit inputs; };
+}
+```
+
+```nix
+# in configuration.nix
+{ pkgs, lib, inputs }:
+# inputs.self, inputs.nix-darwin, and inputs.nixpkgs can be accessed here
+```
+
+</details>
+
+<details>
+<summary>Channels</summary>
+
+### Step 1. Creating `configuration.nix`
+
+Copy the [simple](./modules/examples/simple.nix) example to `/etc/nix-darwin/configuration.nix`.
+
+### Step 2. Adding `nix-darwin` channel
+
+```bash
+# If you use Nixpkgs unstable (the default):
+sudo nix-channel --add https://github.com/nix-darwin/darwinpkgs/archive/master.tar.gz darwin
+# If you use Nixpkgs 24.11:
+sudo nix-channel --add https://github.com/nix-darwin/darwinpkgs/archive/nix-darwin-24.11.tar.gz darwin
+
+sudo nix-channel --update
+```
+
+### Step 3. Installing `nix-darwin`
+
+To install `nix-darwin`, you can just run `darwin-rebuild switch` to install nix-darwin. As `darwin-rebuild` won't be installed in your `PATH` yet, you can use the following command:
+
+```bash
+nix-build '<darwin>' -A darwin-rebuild
+./result/bin/darwin-rebuild switch -I darwin-config=/etc/nix-darwin/configuration.nix
+```
+
+### Step 4. Using `nix-darwin`
+
+After installing, you can run `darwin-rebuild` to apply changes to your system:
+
+```bash
+darwin-rebuild switch
+```
+
+### Step 5. Updating `nix-darwin`
+
+You can update Nixpkgs and `nix-darwin` using the following command:
+
+```bash
+sudo nix-channel --update
+```
+
+</details>
+
+## Documentation
+
+`darwin-help` will open up a local copy of the reference documentation, it can also be found online [here](https://nix-darwin.org/manual/stable).
+
+The documentation is also available as manpages by running `man 5 configuration.nix`.
+
+## Uninstalling
+
+To run the latest version of the uninstaller, you can run the following command:
+
+```
+nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller
+```
+
+If that command doesn't work for you, you can try the locally installed uninstaller:
+
+```
+darwin-uninstaller
+```
+
+## Tests
+
+There are basic tests that run sanity checks for some of the modules,
+you can run them like this:
+
+```bash
+# run all tests
+nix-build release.nix -A tests
+# or just a subset
+nix-build release.nix -A tests.environment-path
+```
 
 # Next Steps
 
-That's not all! Trunk has even more useful features. Head on over to the following sections to learn more about how to use Trunk effectively.
+You can go further and configure your own system with nix-darwin as you wish. Refer to following materials to find out more:
 
-- [Configuration](@/configuration.md): learn about Trunk's configuration system and how to use the Trunk proxy.
-- [Commands](@/commands.md): learn about Trunk's CLI commands for use in your development workflows.
-
-- Join us on Discord by following this link [![](https://img.shields.io/discord/793890238267260958?logo=discord&style=flat-square "Discord Chat")](https://discord.gg/JEPdBujTDr)
+- [Configuration](@/configuration.md): various issues and more infromation about configuration.
+- [Commands](@/commands.md): learn about nix-darwin's CLI commands for use to interact with your configurations.
+- [Changelog](@/changelog.md): keep track of updates and changes happening in nix-darwin.
 
 # Contributing
 
-Anyone and everyone is welcome to contribute! Please review the [CONTRIBUTING.md](https://github.com/trunk-rs/trunk/blob/main/CONTRIBUTING.md) document for more details. The best way to get started is to find an open issue, and then start hacking on implementing it. Letting other folks know that you are working on it, and sharing progress is a great approach. Open pull requests early and often, and please use GitHub's draft pull request feature.
+Let's make Nix on macOS awesome!
+
+Don't hesitate to contribute modules or open an issue.
+
+To build your configuration with local changes you can run this. This
+flag can also be used to override darwin-config or nixpkgs, for more
+information on the `-I` flag look at the nix-build [manpage](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
+
+```bash
+darwin-rebuild switch -I darwin=.
+```
+
+If you're adding a module, please add yourself to `meta.maintainers`, for example
+
+```nix
+  meta.maintainers = [
+    lib.maintainers.alice or "alice"
+  ];
+
+  options.services.alicebot = # ...
+```
+
+The `or` operator takes care of graceful degradation when `lib` from Nixpkgs
+goes out of sync.
+
+Also feel free to contact me if you have questions,
+
+- Matrix - @daiderd:matrix.org, you can find me in [#macos:nixos.org](https://matrix.to/#/#macos:nixos.org)
+- [@LnL7](https://x.com/LnL7) on twitter
 
 # License
 
-<span><img src="https://img.shields.io/badge/license-MIT%2FApache--2.0-blue?style=flat-square" alt="license badge"/></span>
+<span><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="license badge"/></span>
 <br>
-trunk is licensed under the terms of the MIT License or the Apache License 2.0, at your choosing.
+Nix Darwin is licensed under the terms of the MIT License.

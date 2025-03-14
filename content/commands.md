@@ -12,16 +12,16 @@ Open configuration options for the current installation of nix-darwin
 
 # darwin-option
 
-`trunk serve` does the same thing as `trunk watch`, but also spawns a web server.
+_WIP_
 
 # darwin-rebuild
 
-`trunk clean` cleans up any build artifacts generated from earlier builds.
+_WIP_
 
 # darwin-version
 
-`trunk config show` prints out Trunk's current config, before factoring in CLI arguments. Nice for testing & debugging.
+_WIP_
 
 # darwin-uninstaller
 
-`trunk tools show` prints out information about tools required by trunk and the project. It shows which tools are expected and which are found.
+_WIP_

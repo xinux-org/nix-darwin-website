@@ -1,6 +1,6 @@
 +++
 title = "Changelog"
-description = "Tracking changes in every version"
+description = "Changes in every release"
 weight = 3
 +++
 

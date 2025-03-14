@@ -8,7 +8,7 @@ Nix darwin ships manualas with every commit. You can either build one yourself o
 
 # Local
 
-After the installation of nix-darwin, you can use `darwin-help` command to access locally available copy of manuals with version corresponds to your installation.
+After the installation of nix-darwin, you can use `darwin-help` or `man 5 configuration.nix` command to access locally available copy of manuals with version corresponds to your installation.
 
 # Build
 
