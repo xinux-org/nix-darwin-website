@@ -15,18 +15,18 @@ After the installation of nix-darwin, you can use `darwin-help` or `man 5 config
 Use the following commands to build manuals for desired commit/tag:
 
 ```bash
-nix build github:nix-darwin/darwinpkgs/nix-darwin-24.11#manualHTML --no-write-lock-file
+nix build github:LnL7/nix-darwin/nix-darwin-24.11#manualHTML --no-write-lock-file
 ```
 
 You may also check out [how we build and serve manuals](https://github.com/nix-darwin/website/blob/main/.github/workflows/deploy.yml) via our GitHub actions.
 
 # Options explorer
 
-If you want to quickly find/navigate through options, you can use our web ui for searching options at [options.nix-darwin.org](https://options.nix-darwin.org).
+If you want to quickly find/navigate through options, you can use our web ui for searching options at [ndo.xinux.uz](https://ndo.xinux.uz).
 
 # List of hosted manuals
 
 Here, you can find list of available manuals hosted in this domain.
 
-- [unstable (25.05) -> master](https://nix-darwin.org/manual/unstable)
-- [stable (24.11)](https://nix-darwin.org/manual/stable)
+- [unstable (25.05) -> master](https://ndw.xinux.uz/manual/unstable)
+- [stable (24.11)](https://ndw.xinux.uz/manual/stable)

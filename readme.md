@@ -35,10 +35,6 @@ zola serve --drafts
 
 Currently, you can build website just by calling `nix build`, however, it won't include all the manuals which I baked right into GitHub workflows with my spaghetti bash scripts. I'm planning to include manuals as well in website and port codes from workflows to nix build steps.
 
-## DNS, Domain, Subdomain
-
-I bought domain at namecheap and I use my personal NS servers hosted in [my global datacenters](https://ns2.kolyma.uz) via NixOS. If you need subdomains of nix-darwin.org, you can send PR at [zones/nix-darwin.org.zone](https://github.com/kolyma-labs/instances/blob/main/data/zones/nix-darwin.org.zone).
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](license) file for details.

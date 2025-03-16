@@ -47,9 +47,9 @@ sudo chown $(id -nu):$(id -ng) /etc/nix-darwin
 cd /etc/nix-darwin
 
 # To use Nixpkgs unstable:
-nix flake init -t github:nix-darwin/darwinpkgs/master
+nix flake init -t github:LnL7/nix-darwin/master
 # To use Nixpkgs 24.11:
-nix flake init -t github:nix-darwin/darwinpkgs/nix-darwin-24.11
+nix flake init -t github:LnL7/nix-darwin/nix-darwin-24.11
 
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
 ```
@@ -71,8 +71,8 @@ Add the following to `flake.nix` in the same folder as `configuration.nix`:
   inputs = {
     # Use `github:NixOS/nixpkgs/nixpkgs-24.11-darwin` to use Nixpkgs 24.11.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # Use `github:nix-darwin/darwinpkgs/nix-darwin-24.11` to use Nixpkgs 24.11.
-    nix-darwin.url = "github:nix-darwin/darwinpkgs/master";
+    # Use `github:LnL7/nix-darwin/nix-darwin-24.11` to use Nixpkgs 24.11.
+    nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -96,9 +96,9 @@ Unlike NixOS, `nix-darwin` does not have an installer, you can just run `darwin-
 
 ```bash
 # To use Nixpkgs unstable:
-nix run github:nix-darwin/darwinpkgs/master#darwin-rebuild -- switch
+nix run github:LnL7/nix-darwin/master#darwin-rebuild -- switch
 # To use Nixpkgs 24.11:
-nix run github:nix-darwin/darwinpkgs/nix-darwin-24.11#darwin-rebuild -- switch
+nix run github:LnL7/nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch
 ```
 
 ### Step 3. Using `nix-darwin`
@@ -141,9 +141,9 @@ Copy the [simple](./modules/examples/simple.nix) example to `/etc/nix-darwin/con
 
 ```bash
 # If you use Nixpkgs unstable (the default):
-sudo nix-channel --add https://github.com/nix-darwin/darwinpkgs/archive/master.tar.gz darwin
+sudo nix-channel --add https://github.com/LnL7/nix-darwin/archive/master.tar.gz darwin
 # If you use Nixpkgs 24.11:
-sudo nix-channel --add https://github.com/nix-darwin/darwinpkgs/archive/nix-darwin-24.11.tar.gz darwin
+sudo nix-channel --add https://github.com/LnL7/nix-darwin/archive/nix-darwin-24.11.tar.gz darwin
 
 sudo nix-channel --update
 ```
@@ -177,7 +177,7 @@ sudo nix-channel --update
 
 ## Documentation
 
-`darwin-help` will open up a local copy of the reference documentation, it can also be found online [here](https://nix-darwin.org/manual/stable).
+`darwin-help` will open up a local copy of the reference documentation, it can also be found online [here](https://ndw.xinux.uz/manual/stable).
 
 The documentation is also available as manpages by running `man 5 configuration.nix`.
 
@@ -186,7 +186,7 @@ The documentation is also available as manpages by running `man 5 configuration.
 To run the latest version of the uninstaller, you can run the following command:
 
 ```
-nix --extra-experimental-features "nix-command flakes" run github:nix-darwin/darwinpkgs#darwin-uninstaller
+nix --extra-experimental-features "nix-command flakes" run github:LnL7/nix-darwin#darwin-uninstaller
 ```
 
 If that command doesn't work for you, you can try the locally installed uninstaller:
