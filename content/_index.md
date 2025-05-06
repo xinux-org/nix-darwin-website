@@ -47,9 +47,9 @@ sudo chown $(id -nu):$(id -ng) /etc/nix-darwin
 cd /etc/nix-darwin
 
 # To use Nixpkgs unstable:
-nix flake init -t github:LnL7/nix-darwin/master
+nix flake init -t github:xinux-org/nix-darwin/master
 # To use Nixpkgs 24.11:
-nix flake init -t github:LnL7/nix-darwin/nix-darwin-24.11
+nix flake init -t github:xinux-org/nix-darwin/nix-darwin-24.11
 
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
 ```
@@ -71,8 +71,8 @@ Add the following to `flake.nix` in the same folder as `configuration.nix`:
   inputs = {
     # Use `github:NixOS/nixpkgs/nixpkgs-24.11-darwin` to use Nixpkgs 24.11.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # Use `github:LnL7/nix-darwin/nix-darwin-24.11` to use Nixpkgs 24.11.
-    nix-darwin.url = "github:LnL7/nix-darwin/master";
+    # Use `github:xinux-org/nix-darwin/nix-darwin-24.11` to use Nixpkgs 24.11.
+    nix-darwin.url = "github:xinux-org/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -96,9 +96,9 @@ Unlike NixOS, `nix-darwin` does not have an installer, you can just run `darwin-
 
 ```bash
 # To use Nixpkgs unstable:
-nix run github:LnL7/nix-darwin/master#darwin-rebuild -- switch
+nix run github:xinux-org/nix-darwin/master#darwin-rebuild -- switch
 # To use Nixpkgs 24.11:
-nix run github:LnL7/nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch
+nix run github:xinux-org/nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch
 ```
 
 ### Step 3. Using `nix-darwin`
@@ -141,9 +141,9 @@ Copy the [simple](./modules/examples/simple.nix) example to `/etc/nix-darwin/con
 
 ```bash
 # If you use Nixpkgs unstable (the default):
-sudo nix-channel --add https://github.com/LnL7/nix-darwin/archive/master.tar.gz darwin
+sudo nix-channel --add https://github.com/xinux-org/nix-darwin/archive/master.tar.gz darwin
 # If you use Nixpkgs 24.11:
-sudo nix-channel --add https://github.com/LnL7/nix-darwin/archive/nix-darwin-24.11.tar.gz darwin
+sudo nix-channel --add https://github.com/xinux-org/nix-darwin/archive/nix-darwin-24.11.tar.gz darwin
 
 sudo nix-channel --update
 ```
@@ -186,7 +186,7 @@ The documentation is also available as manpages by running `man 5 configuration.
 To run the latest version of the uninstaller, you can run the following command:
 
 ```
-nix --extra-experimental-features "nix-command flakes" run github:LnL7/nix-darwin#darwin-uninstaller
+nix --extra-experimental-features "nix-command flakes" run github:xinux-org/nix-darwin#darwin-uninstaller
 ```
 
 If that command doesn't work for you, you can try the locally installed uninstaller:
@@ -240,13 +240,13 @@ If you're adding a module, please add yourself to `meta.maintainers`, for exampl
 The `or` operator takes care of graceful degradation when `lib` from Nixpkgs
 goes out of sync.
 
-Also feel free to contact me if you have questions,
+Also feel free to contact if you have questions,
 
-- Matrix - @daiderd:matrix.org, you can find me in [#macos:nixos.org](https://matrix.to/#/#macos:nixos.org)
-- [@LnL7](https://x.com/LnL7) on twitter
+- Matrix - find nix-darwin team at [#macos:nixos.org](https://matrix.to/#/#macos:nixos.org)
+- Telegram - xinux team at [@xinux](https://t.me/xinux)
 
 # License
 
 <span><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="license badge"/></span>
 <br>
-Nix Darwin is licensed under the terms of the MIT License.
+Xinux Nix Darwin website is licensed under the terms of the MIT License. The Xinux'es fork of nix-darwin is dual licensed with MIT being inherited from upstream and Xinux'es additions under CC0-1.0.

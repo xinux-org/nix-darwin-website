@@ -16,7 +16,7 @@ Occasionally one might want to run a patched version of nix-darwin, for example 
 
 One approach is to use a local copy if the nix-darwin repo, with the relevant code checked out.
 
-Alternatively, for e.g. the pull request at https://github.com/LnL7/nix-darwin/pull/550, one can append .patch to the URL: https://patch-diff.githubusercontent.com/raw/LnL7/nix-darwin/pull/550.patch
+Alternatively, for e.g. the pull request at https://github.com/nix-darwin/nix-darwin/pull/550, one can append .patch to the URL: https://patch-diff.githubusercontent.com/raw/nix-darwin/nix-darwin/pull/550.patch
 
 The patch could then be locally referenced from a flake like so (copied from this comment):
 
@@ -28,7 +28,7 @@ The patch could then be locally referenced from a flake like so (copied from thi
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
 
     darwin = {
-      url = "github:lnl7/nix-darwin";
+      url = "github:xinux-org/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };

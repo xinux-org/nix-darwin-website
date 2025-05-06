@@ -13,7 +13,7 @@
 
 ## About
 
-As the github organization itself, this is an unofficial website for `LnL7` and nix-darwin maintainer's effort, the nix-darwin project.
+As the github organization indicates clearly, this is an unofficial website for the fork of nix-darwin maintainer's effort, the nix-darwin project.
 
 ## Building & Development
 

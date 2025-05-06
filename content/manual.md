@@ -15,7 +15,7 @@ After the installation of nix-darwin, you can use `darwin-help` or `man 5 config
 Use the following commands to build manuals for desired commit/tag:
 
 ```bash
-nix build github:LnL7/nix-darwin/nix-darwin-24.11#manualHTML --no-write-lock-file
+nix build github:xinux-org/nix-darwin/nix-darwin-24.11#manualHTML --no-write-lock-file
 ```
 
 You may also check out [how we build and serve manuals](https://github.com/nix-darwin/website/blob/main/.github/workflows/deploy.yml) via our GitHub actions.
