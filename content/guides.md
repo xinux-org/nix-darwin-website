@@ -48,11 +48,11 @@ No, it's not. I'd love to see you try installing Nix using official shell instal
 
 The problem is, the official installer will do only basic installation without further helpful configurations like `nix-comamnd` or `flakes`. There is a yet another nix installer namely `Determinate Nix installer` which does everything for you. You can check out more [here](https://zero-to-nix.com/start/install) or proceed with installation just by running this on your terminal:
 
+> While installing, it will prompt you to either install Determinate Nix distro or Vanilla NixOS, if you are planning to use nix-darwin, go with vanilla one and say [no].
+
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
-
-> While installing, it will prompt you to either install Determinate Nix distro or Vanilla NixOS, if you are planning to use nix-darwin, go with vanilla one.
 
 > Everytime your MacOS updates (even security patches), your nix breaks. Nix stores init scripts on global zshrc file and MacOS updates reset zshrc or shell files or... MacOS might update/remove disk volumes used by Nix. You can either fix it manually by writing those configs back, fighting back with diskutil or just run:
 >
