@@ -243,7 +243,7 @@ goes out of sync.
 Also feel free to contact if you have questions,
 
 - Matrix - find nix-darwin team at [#macos:nixos.org](https://matrix.to/#/#macos:nixos.org)
-- Telegram - xinux team at [@xinux](https://t.me/xinux)
+- Telegram - `macos & darwin` topic at xinux chat [@xinux](https://t.me/xinux/336221)
 
 # License
 
