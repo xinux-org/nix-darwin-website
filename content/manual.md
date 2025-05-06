@@ -22,11 +22,11 @@ You may also check out [how we build and serve manuals](https://github.com/nix-d
 
 # Options explorer
 
-If you want to quickly find/navigate through options, you can use our web ui for searching options at [ndo.xinux.uz](https://ndo.xinux.uz).
+If you want to quickly find/navigate through options, you can use our web ui for searching options at [options.nix-darwin.uz](https://options.nix-darwin.uz).
 
 # List of hosted manuals
 
 Here, you can find list of available manuals hosted in this domain.
 
-- [unstable (25.05) -> master](https://ndw.xinux.uz/manual/unstable)
-- [stable (24.11)](https://ndw.xinux.uz/manual/stable)
+- [unstable (25.05) -> master](https://nix-darwin.uz/manual/unstable)
+- [stable (24.11)](https://nix-darwin.uz/manual/stable)

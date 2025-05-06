@@ -1,6 +1,6 @@
-base_url = "https://ndw.xinux.uz/"
-title = "Unofficial Nix Darwin | NixOS like modules for darwin machines"
-description = "NixOS like modules for darwin machines"
+base_url = "https://nix-darwin.uz/"
+title = "Xinux Nix Darwin | Darwin qurilmalari uchun NixOS kabi modullar"
+description = "Darwin qurilmalari uchun NixOS kabi modullar"
 compile_sass = true
 build_search_index = true
 generate_sitemap = true
@@ -14,9 +14,9 @@ highlight_theme = "inspired-github"
 
 [extra]
 favicon = "nix-darwin.svg"
-juice_logo_name = "Unofficial Nix Darwin"
+juice_logo_name = "Xinux Nix Darwin"
 juice_logo_path = "nix-darwin.svg"
 juice_extra_menu = [
-  { title = "Options", link = "https://ndo.xinux.uz" },
+  { title = "Options", link = "https://options.nix-darwin.uz" },
   { title = "GitHub", link = "https://github.com/xinux-org" },
 ]

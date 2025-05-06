@@ -1,5 +1,5 @@
 +++
-title = "Nix Darwin"
+title = "Xinux Nix Darwin"
 sort_by = "weight"
 +++
 
@@ -177,7 +177,7 @@ sudo nix-channel --update
 
 ## Documentation
 
-`darwin-help` will open up a local copy of the reference documentation, it can also be found online [here](https://ndw.xinux.uz/manual/stable).
+`darwin-help` will open up a local copy of the reference documentation, it can also be found online [here](https://nix-darwin.uz/manual/stable).
 
 The documentation is also available as manpages by running `man 5 configuration.nix`.
 

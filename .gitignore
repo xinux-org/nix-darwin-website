@@ -6,3 +6,6 @@ result
 
 # Zed output
 nohup.out
+
+# Direnv
+.direnv

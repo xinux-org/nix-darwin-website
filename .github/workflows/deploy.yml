@@ -29,9 +29,6 @@ jobs:
       - name: Install Nix on da machine
         uses: DeterminateSystems/nix-installer-action@main
 
-      - name: Use nix cache via GitHub
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
       - name: Build website
         run: nix run nixpkgs#zola -- build --drafts
 
@@ -39,7 +36,7 @@ jobs:
         run: |
           # Remove old result and build docs for given branch
           rm -Rf result
-          nix build github:LnL7/nix-darwin/$ND_RELEASE#manualHTML --no-write-lock-file
+          nix build github:xinux-org/nix-darwin/$ND_RELEASE#manualHTML --no-write-lock-file
 
           # Extract version from branch (it's master technically)
           version="unstable"
@@ -53,7 +50,7 @@ jobs:
       - name: Build manual for 24.11
         run: |
           rm -Rf result
-          nix build github:LnL7/nix-darwin/$ND_RELEASE#manualHTML --no-write-lock-file
+          nix build github:xinux-org/nix-darwin/$ND_RELEASE#manualHTML --no-write-lock-file
 
           # Extract version from branch
           input="$ND_RELEASE"
